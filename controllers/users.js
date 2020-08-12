@@ -5,37 +5,6 @@ require('dotenv').config();
 const NotFoundError = require('../errors/not-found-err');
 const ValidationError = require('../errors/validation-err');
 
-/*
-module.exports.getUsers = (req, res, next) => {
-  User.find({})
-    .then((users) => {
-      res.send({ data: users });
-    })
-    .catch((err) => {
-      next(err);
-    });
-};
-*/
-
-/*
-module.exports.getUserById = (req, res, next) => {
-  User.findById(req.params.id)
-    .then((found) => {
-      if (!found) {
-        throw new NotFoundError(`Пользователь с ID=${req.params.id} не найден`);
-      }
-      return res.send(found);
-    })
-    .catch((e) => {
-      if (e.name === 'CastError') {
-        const err = new Error(`Передан некорректный ID=${req.params.id}`);
-        err.statusCode = 400;
-        next(err);
-      } else next(e);
-    });
-};
-*/
-
 module.exports.getUserById = (req, res, next) => {
   User.findById(req.user._id)
     .then((found) => {
@@ -53,51 +22,6 @@ module.exports.getUserById = (req, res, next) => {
     });
 };
 
-/*
-module.exports.updateUserProfile = (req, res, next) => {
-  const { name, about } = req.body;
-  const opts = { runValidators: true, new: true };
-  User.findByIdAndUpdate(req.user._id, { name, about }, opts)
-    .then((found) => {
-      if (!found) {
-        throw new NotFoundError(`Пользователь с ID=${req.params.id} не найден`);
-      }
-      return res.send(found);
-    })
-    .catch((e) => {
-      if (e.name === 'ValidationError') {
-        const err = new ValidationError(e.message);
-        next(err);
-      } else {
-        next(e);
-      }
-    });
-};
-*/
-
-/*
-module.exports.updateUserAvatar = (req, res, next) => {
-  const { avatar } = req.body;
-  const opts = { runValidators: true, new: true };
-  User.findByIdAndUpdate(req.user._id, { avatar }, opts)
-    .then((found) => {
-      if (!found) {
-        throw new NotFoundError(`Пользователь с ID=${req.params.id} не найден`);
-      }
-      return res.send(found);
-    })
-    .catch((e) => {
-      if (e.name === 'ValidationError') {
-        const err = new ValidationError('Ошибка валидации данных');
-        next(err);
-      } else {
-        next(e);
-      }
-    });
-};
-*/
-
-/*
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   try {
@@ -128,12 +52,10 @@ module.exports.login = (req, res, next) => {
     })
     .catch((err) => next(err));
 };
-*/
 
-/*
 module.exports.createUser = (req, res, next) => {
   const {
-    name, about, avatar, email, password,
+    name, email, password,
   } = req.body;
   try {
     if (!password.trim()) throw new ValidationError('Поле "пароль" должно быть заполнено');
@@ -143,7 +65,7 @@ module.exports.createUser = (req, res, next) => {
 
   return bcrypt.hash(password, 10)
     .then((hash) => User.create({
-      name, about, avatar, email, password: hash,
+      name, email, password: hash,
     }))
     .then((user) => {
       res.status(201).send({
@@ -164,4 +86,3 @@ module.exports.createUser = (req, res, next) => {
       }
     });
 };
-*/

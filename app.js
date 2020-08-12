@@ -7,15 +7,15 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 
-// const { errors } = require('celebrate');
+const { errors } = require('celebrate');
 
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
-// const { auth } = require('./middlewares/auth');
+const { auth } = require('./middlewares/auth');
 
 const routerUsers = require(path.join(__dirname, 'routes/router-users.js'));
-// const routerCards = require(path.join(__dirname, 'routes/router-cards.js'));
-// const routerSignInUp = require(path.join(__dirname, 'routes/router-signin-signup.js'));
+const routerArticles = require(path.join(__dirname, 'routes/router-articles.js'));
+const routerSignInUp = require(path.join(__dirname, 'routes/router-signin-signup.js'));
 
 const routerErr = require(path.join(__dirname, 'middlewares/router-err.js'));
 
@@ -23,7 +23,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 
-mongoose.connect('mongodb://localhost:27017/mestodb', {
+mongoose.connect('mongodb://localhost:27017/diplomadb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -34,8 +34,8 @@ const limiter = rateLimit({
   max: 100, // limit each IP to 100 requests per windowMs
 });
 
-// app.use(limiter);
-// app.use(helmet());
+app.use(limiter);
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(requestLogger);
@@ -44,10 +44,10 @@ app.use(requestLogger);
 //     throw new Error('Сервер сейчас упадёт');
 //   }, 0);
 // });
-// app.use('/', routerSignInUp);
-// app.use(auth);
+app.use('/', routerSignInUp);
+app.use(auth);
 app.use('/', routerUsers);
-// app.use('/', routerCards);
+app.use('/', routerArticles);
 app.use(routerErr);
 app.use(errorLogger);
 app.use(errors());

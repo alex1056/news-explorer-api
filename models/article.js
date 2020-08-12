@@ -15,8 +15,8 @@ const articleSchema = new mongoose.Schema({
     required: [true, 'Поле должно содержать значение'],
   },
   date: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required: [true, 'Поле должно содержать значение'],
   },
   source: {
     type: String,
