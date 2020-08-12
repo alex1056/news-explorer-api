@@ -21,17 +21,19 @@ const routerErr = require(path.join(__dirname, 'middlewares/router-err.js'));
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const {
+  PORT = 3000, MONGO_HOST = 'localhost', MONGO_PORT = '27017', DB_NAME = 'diplomadb',
+} = process.env;
 
-mongoose.connect('mongodb://localhost:27017/diplomadb', {
+mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${DB_NAME}`, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100,
 });
 
 app.use(limiter);
