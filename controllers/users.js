@@ -4,6 +4,7 @@ const User = require('../models/user');
 require('dotenv').config();
 const NotFoundError = require('../errors/not-found-err');
 const ValidationError = require('../errors/validation-err');
+const { JWT_SECRET_DEV } = require('../config');
 
 module.exports.getUserById = (req, res, next) => {
   User.findById(req.user._id)
@@ -11,7 +12,8 @@ module.exports.getUserById = (req, res, next) => {
       if (!found) {
         throw new NotFoundError(`Пользователь с ID=${req.user._id} не найден`);
       }
-      return res.send(found);
+      const { name, email } = found;
+      return res.send({ name, email });
     })
     .catch((e) => {
       if (e.name === 'CastError') {
@@ -40,7 +42,7 @@ module.exports.login = (req, res, next) => {
       const { NODE_ENV, JWT_SECRET } = process.env;
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' },
+        NODE_ENV === 'production' ? JWT_SECRET : JWT_SECRET_DEV, { expiresIn: '7d' },
       );
 
       res

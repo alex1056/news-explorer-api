@@ -1,6 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
 const routerSignInUp = require('express').Router();
-// const joiCustomUrlValidator = require('../helpers/joi-custom-url-validator.js');
 const {
   createUser, login,
 } = require('../controllers/users');
