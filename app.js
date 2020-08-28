@@ -32,6 +32,28 @@ mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${DB_NAME}`, {
   useFindAndModify: false,
 });
 
+app.use((req, res, next) => {
+  // res.header('Access-Control-Allow-Origin', 'https://praktikum.tk');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  next();
+});
+
+const allowedCors = [
+  // 'https://praktikum.tk',
+  // 'http://praktikum.tk',
+  'localhost:3000',
+];
+
+app.use((req, res, next) => {
+  const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
+  if (allowedCors.includes(origin)) {
+    // Проверяем, что значение origin есть среди разрешённых доменов
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  next();
+});
+
 app.use(limiter);
 app.use(helmet());
 app.use(bodyParser.json());
