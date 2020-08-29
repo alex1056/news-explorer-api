@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
@@ -32,6 +33,7 @@ mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${DB_NAME}`, {
   useFindAndModify: false,
 });
 
+/*
 app.options('*', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Headers', 'Content-Type');
@@ -62,6 +64,25 @@ app.use((req, res, next) => {
   }
   next();
 });
+*/
+
+const corsOptions = {
+  origin: 'http://localhost:8080',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.options('*', cors(corsOptions));
+// const whitelist = ['http://localhost:8080', 'http://example2.com']
+// const corsOptions = {
+//   origin = function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// };
+app.use(cors(corsOptions));
 
 app.use(limiter);
 app.use(helmet());
