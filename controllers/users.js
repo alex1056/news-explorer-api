@@ -55,6 +55,14 @@ module.exports.login = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+module.exports.logout = (req, res) => {
+  res.cookie('jwt', '', {
+    maxAge: 1,
+    httpOnly: true,
+  })
+    .end();
+};
+
 module.exports.createUser = (req, res, next) => {
   const {
     name, email, password,

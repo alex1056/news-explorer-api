@@ -6,6 +6,7 @@ const { JWT_SECRET_DEV } = require('../config');
 module.exports.auth = (req, res, next) => {
   let token;
   try {
+    // console.log(req.cookies.jwt);
     token = req.cookies.jwt;
   } catch (e) {
     const err = new AuthRequiredError('Необходима авторизация');
