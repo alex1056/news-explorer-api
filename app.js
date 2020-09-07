@@ -43,23 +43,24 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Credentials', 'true');
+  res.set('Access-Control-Allow-Origin', 'http://localhost:8080');
   next();
 });
 
-const allowedCors = [
-  'localhost:8080',
-  'http://localhost:8080',
-];
+// const allowedCors = [
+//   'localhost:8080',
+//   'http://localhost:8080',
+// ];
 
-app.use((req, res, next) => {
-  const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
-  // console.log(req.headers);
-  if (allowedCors.includes(origin)) {
-    // Проверяем, что значение origin есть среди разрешённых доменов
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
+//   // console.log(req.headers);
+//   if (allowedCors.includes(origin)) {
+//     // Проверяем, что значение origin есть среди разрешённых доменов
+//     res.header('Access-Control-Allow-Origin', origin);
+//   }
+//   next();
+// });
 
 // не мой код
 // const corsOptions = {
