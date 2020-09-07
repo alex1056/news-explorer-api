@@ -56,7 +56,7 @@ const whiteList = [
   'https://diploma-2020.ru'];
 const corsOptions = {
   origin: (origin, callback) => {
-    console.log(origin);
+    // console.log(origin);
     if (whiteList.includes(origin) || !origin) {
       callback(null, true);
     } else {
@@ -65,7 +65,7 @@ const corsOptions = {
   },
   credentials: true,
 };
-
+// app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
 
 // const allowedCors = [
