@@ -49,8 +49,8 @@ app.use((req, res, next) => {
 */
 
 const whiteList = [
-  'https://alex1056.github.io/news-explorer-frontend/',
-  'http://alex1056.github.io/news-explorer-frontend/',
+  'https://alex1056.github.io',
+  'http://alex1056.github.io',
   'http://localhost:8080',
   'http://diploma-2020.ru',
   'https://diploma-2020.ru'];
