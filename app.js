@@ -68,7 +68,7 @@ app.use((req, res, next) => {
 
 const corsOptions = {
   // origin: ['http://diploma-2020.ru', 'https://diploma-2020.ru', 'http://localhost:8080', 'http://localhost:3000'],
-  origin: 'http://localhost:8080',
+  origin: ['http://localhost:8080'],
   optionsSuccessStatus: 200,
   credentials: true,
   methods: 'GET, POST, DELETE',
