@@ -33,7 +33,6 @@ mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${DB_NAME}`, {
   useFindAndModify: false,
 });
 
-/*
 app.options('*', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Headers', 'Content-Type');
@@ -41,7 +40,6 @@ app.options('*', (req, res) => {
 });
 
 app.use((req, res, next) => {
-  // res.header('Access-Control-Allow-Origin', 'https://praktikum.tk');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Credentials', 'true');
@@ -49,8 +47,6 @@ app.use((req, res, next) => {
 });
 
 const allowedCors = [
-  // 'https://praktikum.tk',
-  // 'http://praktikum.tk',
   'localhost:8080',
   'http://localhost:8080',
 ];
@@ -64,15 +60,15 @@ app.use((req, res, next) => {
   }
   next();
 });
-*/
 
-const corsOptions = {
-  // origin: ['http://diploma-2020.ru', 'https://diploma-2020.ru', 'http://localhost:8080', 'http://localhost:3000'],
-  origin: ['http://localhost:8080'],
-  optionsSuccessStatus: 200,
-  credentials: true,
-  methods: 'GET, POST, DELETE',
-};
+// не мой код
+// const corsOptions = {
+//   // origin: ['http://diploma-2020.ru', 'https://diploma-2020.ru', 'http://localhost:8080', 'http://localhost:3000'],
+//   origin: ['http://localhost:8080'],
+//   optionsSuccessStatus: 200,
+//   credentials: true,
+//   methods: 'GET, POST, DELETE',
+// };
 
 // app.options('*', cors(corsOptions));
 // const whitelist = ['http://localhost:8080', 'http://example2.com']
@@ -85,7 +81,7 @@ const corsOptions = {
 //     }
 //   }
 // };
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use(limiter);
 app.use(helmet());
