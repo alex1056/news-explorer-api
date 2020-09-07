@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 });
 */
 
-const whiteList = ['http://localhost:8080'];
+const whiteList = ['http://localhost:8080', 'http://diploma-2020.ru', 'https://diploma-2020.ru'];
 const corsOptions = {
   origin: (origin, callback) => {
     console.log(origin);
