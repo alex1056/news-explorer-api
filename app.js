@@ -32,7 +32,7 @@ mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${DB_NAME}`, {
   useCreateIndex: true,
   useFindAndModify: false,
 });
-
+/*
 app.options('*', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Headers', 'Content-Type');
@@ -46,6 +46,22 @@ app.use((req, res, next) => {
   res.set('Access-Control-Allow-Origin', 'http://localhost:8080');
   next();
 });
+*/
+
+const whiteList = ['http://localhost:8080'];
+const corsOptions = {
+  origin: (origin, callback) => {
+    console.log(origin);
+    if (whiteList.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // const allowedCors = [
 //   'localhost:8080',
