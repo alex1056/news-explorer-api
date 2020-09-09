@@ -32,21 +32,6 @@ mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${DB_NAME}`, {
   useCreateIndex: true,
   useFindAndModify: false,
 });
-/*
-app.options('*', (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Headers', 'Content-Type');
-  res.send('ok');
-});
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.set('Access-Control-Allow-Origin', 'http://localhost:8080');
-  next();
-});
-*/
 
 const whiteList = [
   'https://alex1056.github.io',
@@ -56,7 +41,6 @@ const whiteList = [
   'https://diploma-2020.ru'];
 const corsOptions = {
   origin: (origin, callback) => {
-    // console.log(origin);
     if (whiteList.includes(origin) || !origin) {
       callback(null, true);
     } else {
@@ -65,45 +49,8 @@ const corsOptions = {
   },
   credentials: true,
 };
-// app.options('*', cors(corsOptions));
+
 app.use(cors(corsOptions));
-
-// const allowedCors = [
-//   'localhost:8080',
-//   'http://localhost:8080',
-// ];
-
-// app.use((req, res, next) => {
-//   const { origin } = req.headers; // Записываем в переменную origin соответствующий заголовок
-//   // console.log(req.headers);
-//   if (allowedCors.includes(origin)) {
-//     // Проверяем, что значение origin есть среди разрешённых доменов
-//     res.header('Access-Control-Allow-Origin', origin);
-//   }
-//   next();
-// });
-
-// не мой код
-// const corsOptions = {
-//   // origin: ['http://diploma-2020.ru', 'https://diploma-2020.ru', 'http://localhost:8080', 'http://localhost:3000'],
-//   origin: ['http://localhost:8080'],
-//   optionsSuccessStatus: 200,
-//   credentials: true,
-//   methods: 'GET, POST, DELETE',
-// };
-
-// app.options('*', cors(corsOptions));
-// const whitelist = ['http://localhost:8080', 'http://example2.com']
-// const corsOptions = {
-//   origin = function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// };
-// app.use(cors(corsOptions));
 
 app.use(limiter);
 app.use(helmet());
