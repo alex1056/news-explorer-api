@@ -15,6 +15,7 @@ REST API приложение для работы фронтенда. Бэкен
 - JavaScript,
 - Express,
 - MongoBD,
+- Node.js,
 - Joi-Celebrate - валидация полей,
 - Winston - логирование запросов.
 
