@@ -1,8 +1,22 @@
 # Дипломный проект. API.
 
-Бэкенд для дипломной работы.
-Функциональность: signin, signup, сохраняет статью, удаляет статью, выводит все статьи.
-Технологии: Express, MongoBD, валидация полей: Joi-Celebrate, логирование запросов выполнено через Winston.
+REST API приложение для работы фронтенда. Бэкенд для дипломной работы.
+
+Функциональность:
+
+- signin,
+- signup,
+- сохранение статьи,
+- удаление статьи,
+- получение всех статей пользователя.
+
+Технологии:
+
+- JavaScript,
+- Express,
+- MongoBD,
+- Joi-Celebrate - валидация полей,
+- Winston - логирование запросов.
 
 Ссылка на API [https://api.diploma-2020.ru/](https://api.diploma-2020.ru/)
 Публичный IP-адрес сервера: 135.181.83.128
@@ -40,10 +54,13 @@
 
 `npm install`
 
-### Configured two build modes:
+### Установка зависимостей:
 
-**Production:**
-`npm run start`
+`npm install`
 
-**Development:**
-`npm run dev`
+### 2 режима запуска:
+
+```
+npm run start
+npm run dev
+```
