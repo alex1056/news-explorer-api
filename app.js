@@ -37,6 +37,7 @@ const whiteList = [
   'https://alex1056.github.io',
   'http://alex1056.github.io',
   'http://localhost:8080',
+  'http://localhost:3000',
   'http://diploma-2020.ru',
   'https://diploma-2020.ru'];
 const corsOptions = {
