@@ -61,6 +61,8 @@ module.exports.logout = (req, res) => {
   res.cookie('jwt', '', {
     maxAge: 1,
     httpOnly: true,
+    sameSite: 'none',
+    secure: true,
   })
     .end();
 };
